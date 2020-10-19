@@ -1,0 +1,16 @@
+005 print "Scroll Test"
+021 Reset(255)
+037 Pause(0,1,0)
+053 var x : int
+069 var grp : int
+085 let x = 325
+101 let grp = 128
+117 Group(2,grp,4,3)
+133 Group(3,grp,2,4)
+149 Group(4,grp,3,2)
+165 Line(3,255,0,0,25,1)
+181 label strt
+197 Shift(grp,1)
+213 let x = x - 1
+229 if x != 0
+245 goto strt

@@ -1,0 +1,113 @@
+005 var LIM2 : int
+007 let LIM2 = 84
+009 var LIM4 : int
+011 let LIM4 = 58
+013 var r1 : int
+015 var g1 : int
+017 var b1 : int
+019 var r2 : int
+021 var g2 : int
+023 var b2 : int
+025 var r : int
+027 var g : int
+029 var b : int
+031 var x : int
+033 var y : int
+035 var num : int
+037 label Strt
+039 print "<reset>\n"
+041 let num = 2
+043 Reset(255)
+045 Pause(0,3,0)
+047 Group(2,128,4,4)
+049 Group(4,128,2,2)
+051 State(128,8)
+053 print "Green\n"
+055 let r1 = 0
+057 let g1 = 255
+059 let b1 = 1
+061 let r2 = 0
+063 let g2 = 255
+065 let b2 = 2
+067 label Init
+069 if x > LIM2
+071 goto Ini2
+073 Line(2,r1,g1,b1,x,1)
+075 label Ini2
+077 if x > LIM4
+079 goto Ini3
+081 Line(4,r1,g1,b1,x,1)
+083 label Ini3
+085 let x = x + 3
+087 if x <= LIM2
+089 goto Init
+091 let x = 2
+093 label Ini4
+095 if x > LIM2
+097 goto Ini5
+099 Line(2,r1,g1,b2,x,1)
+101 label Ini5
+103 if x > LIM4
+105 goto Ini6
+107 Line(4,r1,g1,b2,x,1)
+109 label Ini6
+111 let x = x + 2
+113 if x <= LIM2
+115 goto Ini4
+117 State(128,4)
+119 Pause(0,10,0)
+121 print "Yellow #1\n"
+123 let x = 145
+125 label Yllw
+127 Pause(0,0,1)
+129 let r = r1 + 2
+131 if r <= 255
+133 goto cnt1
+135 let r = 255
+137 label cnt1
+139 let g = g1 - 1
+141 let y = x % 20
+143 if y != 0
+145 goto swp1
+147 Shift(128,1)
+149 label swp1
+151 Swap(255,r1,g1,b1,r,g,b1)
+153 let r1 = r
+155 let g1 = g
+157 let x = x - 1
+159 if x > 0
+161 goto Yllw
+163 Pause(0,10,0)
+165 let x = 110
+167 print "Red\n"
+169 label Red
+171 Pause(0,0,1)
+173 let g = g1 - 1
+175 Swap(255,r1,g1,b1,r,g,b1)
+177 let g1 = g
+179 let x = x - 1
+181 if x > 0
+183 goto Red
+185 Pause(0,10,0)
+187 let num = num - 1
+189 if num = 0
+191 goto Fade
+193 print "Yellow #2\n"
+195 let r1 = r2
+197 let g1 = g2
+199 let b1 = b2
+201 let x = 145
+203 goto Yllw
+205 label Fade
+207 let x = 255
+209 print "Fade\n"
+211 Swap(128,x,0,b2,x,0,1)
+213 label Fad2
+215 let x = x - 1
+217 if x = 0
+219 goto End
+221 Swap(128,x + 1, 0, 1, x, 0, 1)
+223 Pause(0,0,2)
+225 goto Fad2
+227 label End
+229 goto Strt

@@ -1,0 +1,15 @@
+001 print "Canada Day effect\n"
+002 label Strt
+004 Reset(255)
+006 Pause(0,3,0)
+010 Group(2,128,4,4)
+014 Group(4,128,2,2)
+020 Bkgrd(128,80,0,0)
+028 Line(2,30,30,25,26,34)
+030 Line(4,30,30,25,18,24)
+034 State(2,1)
+035 State(4,1)
+038 Speed(128,2)
+040 Twinkle(128,1,3,5,30)
+050 Pause(5,0,0)
+060 goto Strt

@@ -1,0 +1,121 @@
+005 print "Xmas effect\n"
+007 Reset(255)
+009 Pause(0,3,0)
+011 var x : int
+013 var y : int
+015 var z : int
+017 var dir : bool
+019 var grp : int
+021 let grp = 128
+023 Group(4,128,4,4)
+025 Group(2,129,2,2)
+027 label begn
+029 let x = 0
+031 Bkgrd(255,0,0,0)
+033 State(2,8)
+035 State(4,8)
+037 let y = 8
+039 label init
+041 if y > 2
+043 Line(4,150,0,0,x,1)
+045 Line(2,150,0,0,x,1)
+047 let x = x + 2
+049 if y > 2
+051 Line(4,0,0,150,x,1)
+053 Line(2,0,0,150,x,1)
+055 let x = x + 2
+057 if y > 2
+059 Line(4,150,50,0,x,1)
+061 Line(2,150,50,0,x,1)
+063 let x = x + 2
+065 if y > 2
+067 Line(4,0,150,0,x,1)
+069 Line(2,0,150,0,x,1)
+071 let x = x + 2
+073 if y > 3
+075 Line(4,150,0,100,x,1)
+077 Line(2,150,0,100,x,1)
+079 let x = x + 2
+081 let y = y - 1
+083 if y != 0
+085 goto init
+087 State(2,4)
+089 State(4,4)
+091 print "Multicolour\n"
+093 Pause(0,30,0)
+095 print "Multicolour shift\n"
+097 let x = 1000
+099 label shft
+101 Shift(2,1)
+103 Shift(4,1)
+105 Pause(0,0,10)
+107 let x = x - 1
+109 if x != 0
+111 goto shft
+113 print "Candy cane\n"
+115 let x = 0
+117 let y = 16
+119 State(2,8)
+121 State(4,8)
+123 Bkgrd(255,0,0,0)
+125 label ini2
+127 if y > 5
+129 Line(4,150,0,0,x,4)
+131 Line(2,150,0,0,x,4)
+133 let x = x + 4
+135 if y > 5
+137 Line(4,255,255,255,x,1)
+139 Line(2,255,255,255,x,1)
+141 let x = x + 1
+143 let y = y - 1
+145 if y != 0
+147 goto ini2
+149 State(2,4)
+151 State(4,4)
+153 let x = 1000
+155 label shf2
+157 Shift(2,1)
+159 Shift(4,1)
+161 Pause(0,0,10)
+163 let x = x - 1
+165 if x != 0
+167 goto shf2
+169 print "Twinkles\n"
+171 Bkgrd(255,150,0,0)
+173 Speed(255,2)
+175 Twinkle(255,2,10,5,50)
+177 Pause(1,0,0)
+179 Bkgrd(255,0,50,0)
+181 Twinkle(255,0,3,3,20)
+183 Pause(1,0,0)
+185 print "Red/Green x-fade\n"
+187 let x = 255
+189 let y = 0
+191 let z = 4
+193 let dir = 0
+195 label loop
+197 label fade
+199 Bkgrd(255,x,y,0)
+201 Pause(0,0,50)
+203 if dir
+205 goto up
+207 let x = x - 1
+209 let y = y + 1
+211 if x = 0
+213 goto next
+215 goto fade
+217 label up
+219 let x = x + 1
+221 let y = y - 1
+223 if y = 0
+225 goto next
+227 goto fade
+229 label next
+231 let z = z - 1
+233 if z = 0
+235 goto end
+237 let dir = !dir
+239 goto loop
+241 label end
+243 goto begn
+

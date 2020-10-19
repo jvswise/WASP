@@ -1,0 +1,38 @@
+005 print "Cross pixel string shift test"
+011 var cnt : int
+017 var r : int
+023 var g : int
+029 var b : int
+035 var r_n : int
+041 var g_n : int
+047 var b_n : int
+053 var grp : int
+059 let r = 100
+065 let g = 100
+071 let b = 15
+077 let grp = 128
+083 Group(4,grp,6,5)
+089 Group(5,grp,4,6)
+095 Group(6,grp,5,4)
+101 label Colr
+107 State(grp,2)
+113 Bkgrd(grp,r,g,b)
+119 State(grp,1)
+125 Pause(0,0,1)
+131 Line(4,255,0,0,1,20)
+137 let cnt = 75
+143 label Shft
+149 Shift(grp,2)
+155 let cnt = cnt - 1
+161 if cnt != 0
+167 goto Shft
+173 let r_n = g + 8 % 256
+179 let g_n = b + 32 % 256
+185 let b_n = r + 8 % 256
+191 Swap(grp,r,g,b,r_n,g_n,b_n)
+197 let b_n = r + 64 % 256
+203 let r = r_n
+209 let g = g_n
+215 let b = b_n
+221 goto Colr
+

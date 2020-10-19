@@ -1,0 +1,9 @@
+005 label Strt
+035 Reset(255)
+065 Pause(0,3,0)
+095 Group(2,128,4,4)
+125 Group(4,128,2,2)
+155 Speed(128,255)
+185 Rain(128,0)
+215 Pause(20,0,0)
+245 goto Strt

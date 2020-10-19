@@ -1,0 +1,93 @@
+005 var x : int
+007 var r : int
+009 var g : int
+011 var b : int
+013 label Strt
+015 Reset(255)
+017 Pause(0,3,0)
+019 Group(2,128,4,4)
+021 Group(4,128,2,2)
+023 print "Dawn\n"
+025 let x = 1
+027 let r = 20
+029 let g = 11
+031 let b = 0
+033 label Dawn
+035 Bkgrd(128, r * x, g * x, b)
+037 Pause(0,0,50)
+039 let x = x + 1
+041 if x < 12
+043 goto Dawn
+045 print "Sunrise\n"
+047 let r = 240
+049 let g = 132
+051 let b = 20
+053 let x = 1
+055 label Rise
+057 Bkgrd(128, r, g, b * x)
+059 Line(4, 240, 132, 0, 58 - x, x)
+061 Pause(0,0,50)
+063 let x = x + 1
+065 if x < 12
+067 goto Rise
+069 print "Daytime\n"
+071 Bkgrd(128,0,200,255)
+073 Line(4,255,210,0,53,5)
+075 let x = 1
+077 label Day1
+079 Pause(0,0,5)
+081 Shift(128,-1)
+083 let x = x + 1
+085 if x < 57
+087 goto Day1
+089 let x = 1
+091 Bkgrd(128,0,200,255)
+093 Line(2,255,210,0,1,5)
+095 label Day2
+097 Pause(0,0,5)
+099 Shift(128,1)
+101 let x = x + 1
+103 if x < 80
+105 goto Day2
+107 print "Sunset\"
+109 let r = 20
+111 let g = 200
+113 let b = 110
+115 let x = 2
+117 label Set
+119 Bkgrd(128, r * x, g / x * 2, b / x * 2)
+121 Line(2, 255, 220 / x, 0, 69, 15)
+123 Pause(0,0,50)
+125 let x = x + 1
+127 if x <= 10
+129 goto Set
+131 print "Dusk\n"
+133 let x = 20
+135 label Dusk
+137 Bkgrd(128,x * 10, 0, 0)
+139 Pause(0,0,30)
+141 let x = x - 2
+143 if x > 0
+145 goto Dusk
+147 print "Nighttime\n"
+149 let x = 1
+151 Bkgrd(128,0,0,0)
+153 Line(4,200,110,30,49,5)
+155 label Moon
+157 Pause(0,0,5)
+159 Shift(128,-1)
+161 let x = x + 1
+163 if x < 50
+165 goto Moon
+167 let x = 1
+169 Bkgrd(128,0,0,0)
+171 Line(2,200,110,30,0,5)
+173 label Mon2
+175 Pause(0,0,5)
+177 Shift(128,1)
+179 let x = x + 1
+181 if x < 80
+183 goto Mon2
+185 goto Strt
+254 label Stop
+255 print "*End*\n"

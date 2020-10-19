@@ -1,0 +1,98 @@
+005 var x : int
+007 var y : int
+009 var z : int
+011 var dir : bool
+013 var grp : int
+015 let grp = 128
+017 label begn
+019 Reset(255)
+021 Pause(0,1,0)
+022 Group(2,128,2,2)
+029 let x = 0
+031 State(128,8)
+033 let y = 9
+035 label init
+037 Line(128,150,0,0,x,1)
+039 let x = x + 2
+041 Line(128,0,0,150,x,1)
+043 let x = x + 2
+045 Line(128,150,50,0,x,1)
+047 let x = x + 2
+049 Line(128,0,150,0,x,1)
+051 let x = x + 2
+053 Line(128,150,0,100,x,1)
+055 let x = x + 2
+057 let y = y - 1
+059 if y != 0
+061 goto init
+063 State(128,4)
+065 print "Multicolour\n"
+067 Pause(0,10,0)
+069 print "Multicolour shift\n"
+071 let x = 175
+073 label shft
+075 Shift(128,1)
+077 Pause(0,0,10)
+079 let x = x - 1
+081 if x != 0
+083 goto shft
+085 print "Candy cane\n"
+087 let x = 0
+089 let y = 17
+091 State(128,8)
+093 Bkgrd(128,0,0,0)
+095 label ini2
+097 Line(128,150,0,0,x,4)
+099 let x = x + 4
+101 Line(128,255,255,255,x,1)
+103 let x = x + 1
+105 let y = y - 1
+107 if y != 0
+109 goto ini2
+111 State(128,4)
+113 let x = 100
+115 label shf2
+117 Shift(128,1)
+119 Pause(0,0,10)
+121 let x = x - 1
+123 if x != 0
+125 goto shf2
+127 print "Twinkles\n"
+129 Bkgrd(128,150,0,0)
+131 Speed(128,2)
+133 Twinkle(128,2,10,5,50)
+135 Pause(0,10,0)
+137 Bkgrd(128,0,50,0)
+139 Twinkle(128,0,3,3,20)
+141 Pause(0,10,0)
+143 print "Red/Green x-fade\n"
+145 let x = 255
+147 let y = 0
+149 let z = 4
+151 let dir = 0
+153 label loop
+155 label fade
+157 Bkgrd(128,x,0,y)
+159 Pause(0,0,1)
+161 if dir
+163 goto up
+165 let x = x - 1
+167 let y = y + 1
+169 if x = 0
+171 goto next
+173 goto fade
+175 label up
+177 let x = x + 1
+179 let y = y - 1
+181 if y = 0
+183 goto next
+185 goto fade
+187 label next
+189 Pause(0,10,0)
+191 let z = z - 1
+193 if z = 0
+195 goto end
+197 let dir = !dir
+199 goto loop
+201 label end
+203 goto begn

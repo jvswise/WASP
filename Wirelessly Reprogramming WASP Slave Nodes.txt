@@ -1,0 +1,120 @@
+How to Reprogram a WASP Slave Node Wirelessly		2019-04-05
+=============================================
+
+Prerequisites:
+-------------
+
+PC:
+  - Program WirelessProgramming.exe (available from LowPowerLab.com) must
+    be available on the PC. (The program does not require installation and
+    could be run from, e.g., a flash drive.)
+     - The program can also be found under .../Arduino sketchbook/
+       Xmas_Pixel_lighting/Wireless_Programming_Support_Files/
+
+Moteino Programmer:
+  - A moteino with 433 MHz radio and USB port is needed.
+  - Upload the WASP_Node_Programmer sketch (located in the Arduino IDE
+    sketchbook under Xmas_Pixel_Lighting > Releases > Release_<#> >
+    WASP_Node_Programmer_v<#>.<nn> where <#> >= 3 and <nn> is any
+    minor release value).
+
+Arduino IDE:
+  - Version 1.8 or greater provides the ability to easily export
+    an Arduino executable in ASCII-encoded hex format.
+
+Moteino Slave(s):  (433 MHz radio)
+  - You need to know the WASP slave node # of each slave to be
+    reprogrammed.
+  - If you don't aleady know the node #, you can take one of two approaches:
+    (1) Power up a WASP controller and connect it to a computer's USB port.
+        Power up the WASP slave; no other slaves should be powered on. Start
+        up PuTTY, connecting to the WASP controller's USB serial (COM) port.
+        - In the controller's command console, enter:
+              netQuery 255
+        - The WASP slave will reply with its node # and current configuration
+          data.
+    (2) Physically connect the PC to the node via USB and an FTDI USB-to-Serial
+        bridge adapter. The slave most likely will be contained within a sealed
+        box that you would need to open up.
+        - Once the slave is connected to the PC, open a serial terminal
+          emulator--such as PuTTY or the Serial Monitor in the Arduino IDE--
+          at a baud rate of 9600, making sure to connect to the COM port of the
+          WASP Slave node.
+        - Upon connecting the console will display the WASP node #. (You
+          may need to cycle power to the WASP slave node to get the
+          startup text that starts with "Wireless Addressable Strings of
+          Pixels (WASP) network...   Node #<#>  (Slave)", where <#> is the
+          WASP slave node #.)
+        - (Though WASP slaves are typically fitted with onboard Flash memory,
+           some development versions might not be. Be sure that the startup
+           text includes the line "SPI Flash for wireless software upgrades:
+           located onboard".)
+           ------- -------
+
+
+Programming Procedure:
+---------------------
+
+0) To connect to the gateway--wireless programming cannot occur while connected
+   --connect a serial terminal emulator (e.g. PuTTY or the Serial Monitor
+   in the Arduino IDE) to the programming node using a baud rate of 115200).
+
+1) Power off the WASP Controller node.
+
+2) In the Arduino IDE, update the Arduino WASP Slave sketch (located in the
+   sketchbook under Xmas_Pixel_Lighting > Releases > Release_<#> >
+   WASP_Slave_v<#>.<nn>, where <#> and <nn> are as above.)
+
+3) In the Arduino IDE, select menu Sketch > Export compiled Binary. The
+   resulting Moteino hex file is located in the folder where the WASP
+   Slave sketch is located, which depends on how the Arduino IDE was
+   configured (e.g. C:\Users\User\Documents\Arduino Development\
+   Arduino sketchbook\Xmas_Pixel_Lighting\Releases\Release_3\
+   WASP_Slave_v3.00\WASP_Slave_v3.00.ino.Moteino.hex).
+    - The above filename assumes that the WASP slave is a straight Moteino.
+      If it is, instead, a Moteino Mega, then the corresponding filename
+      would be WASP_Slave_v3.00.ino.MoteinoMEGA.hex.
+
+4) Connect the Moteino Programmer to the PC via USB.
+
+5) Start up the WirelessProgramming.exe program. Set the following field
+   values:
+    - Click the "Browse Hex file.." button and select the hex file that
+      was generated in step 3.
+    - Serial port of programmer Moteino (baud 115200):
+       - Select the COM port to which the Moteino Programmer (from step 4)
+         is connected.
+    - Target node ID:
+       - Select the WASP node # for the WASP slave to be reprogrammed.
+         If you don't know the number, refer to the steps for "Moteino
+         Slave(s)" under the "Prerequisites" section above.
+    - HEX lines per RF packet:
+       - Leave this at the default of "3 (faster)" unless the programmer
+         is having communication issues with the slave.
+    - Run OTA.py:
+       - Leave this at the default value (unchecked).
+   NOTE: The programmer and slave must have the same network ID (77),
+         operating frequency (433 MHz), and encryption key value (WASP
+         currently uses no encryption).
+
+6) In the WirelessProgramming app, click the "Start!" button.
+    - The "Log:" window should display the following:
+       Opening COM<n> @ 115200baud...     (where <n> is the COM port number)
+       SET TARGET: TO:<m>                 (where <m> is the slave node #)
+       Moteino: [TO:<m>:OK]               (where <m> is the slave node #)
+       TARGET SET OK
+       FLX?
+       FLX?
+       Moteino: [FLX?OK]
+       HANDSHAKE OK!
+       TX > FLX:<#>:<...> RX > FLX:<#>:OK (where <#> is sequence # starting at
+                                           0 and <...> is a hex code sequence)
+         ...
+       TX > FLX:<#>:<...> RX > FLX:<#>:OK
+       Moteino: [FLX?OK]
+       EOF
+       SUCCESS! (time elapsed: <N>s)      (where <N> is an elapsed time)
+      
+    - The programming process takes about 30 seconds to complete.
+
+7) Close the WirelessProgramming app.

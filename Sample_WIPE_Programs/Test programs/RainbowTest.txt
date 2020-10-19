@@ -1,0 +1,54 @@
+NOTE: Don't include these comments.
+WIPE sample program file: RainbowTest
+
+This is an initial, small test program (written in the WIPE language and
+for the WASP Interactive Programming Environment) to exercise most of
+the language features and a few of the standard functions. It runs
+thru a loop 10 times, each time running the Rainbox effect (Rain()) for 
+3 seconds, then the RainbowCycle() effect (Cycle()) for 3 seconds.
+Each time thru the loop, the speed of the effects is increased
+(Speed()). The function prints the current Rainbow/RainbowCycle
+stage (print) each time thru the loop.
+
+To run this program, connect a terminal emulator to the WASP Controller
+node (via the Arduini/Moteino Serial console port). In the command
+line, enter:
+  program
+This takes you to the WASP Interactive Programming Environment (WIPE),
+a WIPE interpreter. You can enter WIPE environment commands (e.g. dir)
+and can also enter WIPE programming language statements for immediate
+execution (e.g. print "hello world"), much like with old BASIC
+interpreters or modern Python programming environments. Copy the
+program statements below into the console (including the statement
+line numbers). Then enter:
+  run
+
+You will need to have at least one WASP slave node powered up and
+connected to an addressable RGB LED string. The slaves will respond
+to the program running on the WASP controller.
+
+NOTE: Lines 105 and 125 have a newline \n character at the end which should
+      be entered as '\n' (unquoted). The listing display is a WIPE
+      anomaly--which may or may not get corrected.
+
+------  cut here ---------------------------------------------`
+005 var x : int
+020 let x = 10
+035 label Loop
+050 print "Rainbow "
+065 print x
+080 print "
+"
+095 Speed(255,x)
+110 Rain(255,0)
+125 Pause(0,3,0)
+140 print "Cycle
+"
+155 Cycle(255)
+170 Pause(0,3,0)
+185 let x = x - 2
+200 if x != 0
+215 goto Loop
+230 Reset(255)
+245 print "*** End ***"
+

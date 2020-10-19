@@ -1,0 +1,107 @@
+005 print "Halloween FX\n"
+007 var r : int
+009 var g : int
+011 var b : int
+013 var k : int
+015 var x : float
+017 var spd : int
+019 label Strt
+021 print "<reset>\n"
+023 Reset(255)
+025 Pause(0,3,0)
+027 Group(2,128,4,4)
+029 Group(4,128,2,2)
+031 let r = 0
+033 let g = 0
+035 let b = 0
+037 print "Orange fade-in\n"
+039 label Orng
+041 Bkgrd(128,r,g,b)
+043 Pause(0,0,10)
+045 let g = g + 1
+047 if g > 50
+049 goto OFad
+051 let x = g
+053 let x = x * 5.1 + 0.5
+055 let r = x
+057 if r > 255
+059 let r = 255
+061 goto Orng
+063 label OFad
+065 Pause(0,3,0)
+067 print "Orange fade-out\n"
+069 label Fad1
+071 let g = g - 1
+073 let x = g
+075 let x = x * 5.1
+077 let r = x
+079 if r > 255
+081 let r = 255
+083 Bkgrd(128,r,g,b)
+085 Pause(0,0,10)
+087 if g != 0
+089 goto Fad1
+091 print "Purple fade-in\n"
+093 let r = 0
+095 let g = 0
+097 label Prpl
+099 Bkgrd(128,r,g,b)
+101 Pause(0,0,10)
+103 let r = r + 1
+105 if r > 50
+107 goto PFad
+109 let x = r
+111 let x = x * 5.1 +  0.5
+113 let b = x
+115 if b > 255
+117 let b = 255
+119 goto Prpl
+121 label PFad
+123 print "Purple fade-down\n"
+125 label Fad2
+127 let r = r - 1
+129 let x = r
+131 let x = x * 5.1
+133 let b = x
+135 if b > 255
+137 let b = 255
+139 Bkgrd(128,r,g,b)
+141 Pause(0,0,10)
+143 if r != 15
+145 goto Fad2
+147 label PTwk
+149 Pause(0,3,0)
+151 print "Purple twinkles\n"
+153 Speed(128,2)
+155 Twinkle(128,3,10,10,50)
+157 Pause(0,10,0)
+159 print "Purple sparkles\n"
+161 let spd = 100
+163 Speed(128, spd)
+165 Twinkle(128,0,1,20,15)
+167 label Sprk
+169 print "  "
+171 print spd
+173 print "\n"
+175 Pause(0,3,0)
+177 let spd = spd - 10
+179 if spd <= 0
+181 goto Fin
+183 Speed(128,spd)
+185 goto Sprk
+187 label Fin
+189 Pause(0,10,0)
+191 print "Scrolling\n"
+193 Bkgrd(128,50,0,255)
+195 Line(2,255,20,0,5,12)
+197 Line(2,255,50,0,7,8)
+199 Line(2,255,100,0,11,2)
+201 let k = 360
+203 label Shft
+205 Shift(128,1)
+207 let k = k - 1
+209 if k != 0
+211 goto Shft
+213 Bkgrd(128,255,255,255)
+215 goto Strt
+

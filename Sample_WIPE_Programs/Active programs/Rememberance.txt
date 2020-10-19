@@ -1,0 +1,61 @@
+005 print "Rememberance\n"
+009 var x : int
+013 var x1 : int
+017 var dir : int
+021 var y : int
+025 var grn : int
+029 label Strt
+033 Reset(255)
+037 Pause(0,3,0)
+041 let x = 1
+045 let dir = 1
+049 let grn = 30
+053 Bkgrd(255,x,x,x)
+057 Line(2,255,0,0,1,13)
+061 Line(2,0,0,0,6,3)
+065 Line(2,0,grn,0,7,1)
+069 Line(2,255,0,0,21,13)
+073 Line(2,0,0,0,26,3)
+077 Line(2,0,grn,0,27,1)
+081 Line(2,255,0,0,41,13)
+085 Line(2,0,0,0,46,3)
+089 Line(2,0,grn,0,47,1)
+093 Line(2,255,0,0,61,13)
+097 Line(2,0,0,0,66,3)
+101 Line(2,0,grn,0,67,1)
+105 Line(4,255,0,0,1,13)
+109 Line(4,0,0,0,6,3)
+113 Line(4,0,grn,0,7,1)
+117 Line(4,255,0,0,21,13)
+121 Line(4,0,0,0,26,3)
+125 Line(4,0,grn,0,27,1)
+129 Line(4,255,0,0,41,13)
+133 Line(4,0,0,0,46,3)
+137 Line(4,0,grn,0,47,1)
+141 label Loop
+145 Pause(0,0,50)
+149 print x
+153 print "\n"
+157 let x1 = x
+161 let y = 1
+165 if x > 20
+169 let y = 2
+173 if x > 100
+177 let y = 4
+181 if x > 200
+185 let y = 8
+189 let y = y * dir
+193 let x = x + y
+197 if x > 255
+201 let x = 255
+205 if x <= 0
+209 let x = 1
+213 Swap(255,x1,x1,x1,x,x,x)
+217 if x = 255
+221 goto Swch
+225 if x = 1
+229 goto Swch
+233 goto Loop
+237 label Swch
+241 let dir = -dir
+245 goto Loop
